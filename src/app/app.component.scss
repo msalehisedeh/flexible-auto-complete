@@ -35,6 +35,7 @@ fieldset {
             height: 25px;
         }
         .info {
+            margin-right: 22px;
             font-size: 0.9rem;
             display: flex;
             flex-direction: column;
@@ -44,6 +45,14 @@ fieldset {
 
             .bold {
                 font-weight: bold;
+            }
+        }
+        &:hover,&:focus {
+            img {
+                background-color: #fff;
+            }
+            .info {
+                color: #fff;
             }
         }
     }

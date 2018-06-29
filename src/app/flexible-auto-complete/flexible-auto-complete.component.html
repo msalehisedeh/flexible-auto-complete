@@ -2,8 +2,9 @@
 <label for="">
     <span class="off-screen" [textContent]="message"></span>
     <input [value]="entry"
+        [placeholder]= "placeholder"
         (keyup)="keyup($event)" />
-    <span [class]="icon" *ngIf="filteredData.length == 0" [class.icon]="true" area-hidden="true"></span>
+    <span [class]="icon ? icon : null" *ngIf="filteredData.length == 0" [class.icon]="true" area-hidden="true"></span>
     <span class="icon fa fa-reply" *ngIf="icon && filteredData.length" area-hidden="true"></span>
 </label>
 <ul *ngIf="filteredData.length" 
@@ -11,6 +12,7 @@
     class="viewport" 
     [style.max-width]="direction === 'horizontal' ? viewport : null"
     [style.overflow-x]="direction === 'horizontal' ? 'auto' : null"
+    [style.flex-direction]="direction === 'horizontal' ? 'row' : 'column'"
     [style.max-height]="direction === 'vertical' ? viewport : null"
     [style.overflow-y]="direction === 'vertical' ? 'auto' : null">
     <li role="listitem" tabindex="0" *ngFor="let item of filteredData" (keyup)="clickup($event, item)" (click)="selectTab(item)">
@@ -22,5 +24,5 @@
 </ul>
 
 <ng-template #defaultTemplate let-detail="data">
-  <span *ngFor="let x of keymap" [textContent]="detail[x] + ' '"></span>
+  <span *ngFor="let x of keymap" [textContent]="detail[x] + '&nbsp;'"></span>
 </ng-template>

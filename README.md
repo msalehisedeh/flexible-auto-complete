@@ -9,6 +9,9 @@ Please send your requests or comments through the link provided below:
 [Live Demo](https://flexible-auto-complete.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-auto-complete) | [Comments/Requests](https://github.com/msalehisedeh/flexible-auto-complete/issues)
 
 
+# Version 1.0.1
+Fixed few issues and added attributes to make the auto-fill function better.
+
 # Version 1.0.0
 
 ```javascript
@@ -31,18 +34,21 @@ You will need to set the auto-complete in your HTML content:
 In this example:
 1) if icon left blank, will not show icon on the auto-complete field.
 2) message is needed to set text in order to make ADA compliant message on each tab.
-4) direction is not handled in this version.
+4) direction options are vertical and horizontal. If hoeizontal, results will be laid out horizontally.
 5) delay time is in miliseconds and delays making remote requests in order to capture as many characters as possible for fast type users.
 6) triggeron will make request after number of charachters reached.
 7) view port max size the popup options.
 8) template allows you to shape the way you want the result be displayed.  otherwise internal default template will be used.
 9) keymap is a list of keys to be used when trying to match up and filter/display data in the response received or in the default data supplied.
 10) if 'source' URL is not supplied, supplied 'data' will be used to do type ahead lookup.
-11) 'source' URL will be concatinated with typed charachters. so, if url is http://somethig/keywords, you need to supply 'http://somethig/' or if it is 'http://somethig?param=keyword' you need to supply 'http://somethig?param='.
+11) 'source' URL will be concatinated with typed charachters. so, if url is http://somethig/keywords, you need to supply 'http://somethig/' or if it is 'http://somethig?param=keyword' you need to supply 'http://somethig?param='. If source URL is supplied, no need to supply data as it will be ignored.
+12) prefetchdata will call the remote source URL without additional arguments and saves the result for filtering when user types in charachters.
+13) remotepath instructs the auto complete to access results through given value. By default, response.body will be used to get the results.  If remotepath contains dot, result will be traverse down to its final destination. for example, "body.data" will fetch data from "response.body.data".
 
 <flexible-auto-complete 
   icon="fa fa-search"
   message="find user" 
+  placeholder="Please enter a name" 
   direction="vertical"
   delayby="300"
   triggeron="2"
@@ -50,6 +56,16 @@ In this example:
   [template]="tab2" 
   [data]="data"
   [keymap]="['fname','lname']"
+  (onselect)="onselection($event)"></flexible-auto-complete>
+  
+<flexible-auto-complete 
+  icon="fa fa-search"
+  message="find user" 
+  placeholder="Please enter a name" 
+  prefetchdata="true"
+  source="http://jsonplaceholder.typicode.com/users/"
+  remotepath="_body"
+  [keymap]="['name']"
   (onselect)="onselection($event)"></flexible-auto-complete>
 
 <ng-template #tab2 let-detail="data">

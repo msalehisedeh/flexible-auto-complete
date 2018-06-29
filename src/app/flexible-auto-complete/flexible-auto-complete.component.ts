@@ -8,6 +8,7 @@ import {
     Component,
 	Input,
 	Output,
+	AfterViewInit,
 	EventEmitter
 } from '@angular/core';
 
@@ -18,21 +19,30 @@ import { Http } from '@angular/http';
 	templateUrl: './flexible-auto-complete.component.html',
 	styleUrls: ['./flexible-auto-complete.component.scss']
 })
-export class FlexibleAutoCompleteComponent {
+export class FlexibleAutoCompleteComponent implements AfterViewInit{
 
 	private interval: any;
 
 	entry = "";
 	filteredData: any[] = [];
 
+	@Input("placeholder")
+	public placeholder = "";
+	
+	@Input("remotepath")
+	public remotepath = "body";
+	
+	@Input("prefetchdata")
+	public prefetchdata = false;
+	
 	@Input('keymap')
     public keymap: any[] = [];
 
     @Input("icon")
-    public icon: string;
+    public icon = "";
 
     @Input("message")
-    public message: string;
+    public message = "";
 
 	@Input("direction")
     public direction = "vertical";
@@ -43,14 +53,14 @@ export class FlexibleAutoCompleteComponent {
     @Input("triggeron")
     public triggeron = 2;
 
-    @Input("source")
-    public source: string;
-
     @Input("viewport")
-    public viewport: string;
+    public viewport = "200px";
 
 	@Input("template")
     public template: any;
+
+    @Input("source")
+    public source: string;
 
     @Input("data")
     public data: any;
@@ -58,7 +68,29 @@ export class FlexibleAutoCompleteComponent {
 	@Output("onselect")
 	onselect = new EventEmitter();
 
-    constructor(private http: Http) {}
+	constructor(private http: Http) {}
+	
+	ngAfterViewInit() {
+		if (this.prefetchdata && this.source) {
+			this.http.get(this.source).subscribe(
+				(result: any) => {
+					const response = this.traverseResult(result);
+					if (response) {
+						this.data = response;
+					}
+				}
+			);
+		}
+	}
+
+	private traverseResult(response) {
+		const list = this.remotepath.split(".");
+		list.map( (item) => {
+			response = response ? response[item] : undefined;
+		});
+		const x = list.length ? response : undefined;
+		return x && (typeof x === "string") ? JSON.parse(x) : x;
+	}
 
 	clickup(event, item) {
 		const code = event.which;
@@ -82,11 +114,14 @@ export class FlexibleAutoCompleteComponent {
 			this.interval = setTimeout( () => {
 				const key = this.entry.toLowerCase();
 				if (key.length > this.triggeron) {
-					if (this.source) {
+					if (!this.prefetchdata && this.source) {
 						this.http.get(this.source + key).subscribe(
 							(result: any) => {
-								this.data = result.body;
-								this.filteredData = result.body;
+								const response = this.traverseResult(result);
+								if (response) {
+									this.data = response;
+									this.filteredData = response;
+								}
 							}
 						);
 					} else if (this.data) {

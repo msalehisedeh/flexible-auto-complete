@@ -4,10 +4,11 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<p>Please type any portion of names: [Mathis,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
+<p>To complete your evaluation of this component, please type any portion of names: [Mathis,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
 <flexible-auto-complete 
   icon="fa fa-search"
   message="find user" 
+  placeholder="Please enter a name" 
   direction="vertical"
   delayby="300"
   triggeron="2"
@@ -22,7 +23,7 @@
   <span class="info">
       <span><span class="bold">Name:</span> {{detail.fname}} {{detail.lname}}</span>
       <span><span class="bold">Age:</span> {{detail.age}}</span>
-      <span><span class="bold">Phone:</span> {{detail.phone}}</span>
+      <span><span class="fa fa-phone" aria-hidden="true"></span>: {{detail.phone}}</span>
     </span>
 </ng-template>
 
