@@ -4,10 +4,15 @@
 Have you ever wanted to have a ready to use auto-complete that can easily fit in your components? Have you thought of what it takes to get there? 
 With flexible auto-complete, you can configure an auto-complete to perform task the way you want it.
 
+**NOTE:** Starting with version 1.1.0 this library is compatible with Angular 6+.
+
 Please send your requests or comments through the link provided below:
 
 [Live Demo](https://flexible-auto-complete.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-auto-complete) | [Comments/Requests](https://github.com/msalehisedeh/flexible-auto-complete/issues)
 
+
+# Version 1.1.0
+Updated libraries to become compatible with Angular 6+. 
 
 # Version 1.0.1
 Fixed few issues and added attributes to make the auto-fill function better.
