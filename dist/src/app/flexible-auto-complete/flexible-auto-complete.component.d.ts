@@ -1,13 +1,16 @@
-import { AfterViewInit, EventEmitter } from '@angular/core';
+import { AfterViewInit, EventEmitter, ElementRef } from '@angular/core';
 import { Http } from '@angular/http';
 export declare class FlexibleAutoCompleteComponent implements AfterViewInit {
     private http;
+    private el;
     private interval;
     entry: string;
     filteredData: any[];
     placeholder: string;
     remotepath: string;
     prefetchdata: boolean;
+    animateonresult: boolean;
+    allowdropdown: boolean;
     keymap: any[];
     icon: string;
     message: string;
@@ -19,10 +22,12 @@ export declare class FlexibleAutoCompleteComponent implements AfterViewInit {
     source: string;
     data: any;
     onselect: EventEmitter<{}>;
-    constructor(http: Http);
+    onsearch: EventEmitter<{}>;
+    constructor(http: Http, el: ElementRef);
     ngAfterViewInit(): void;
     private traverseResult(response);
-    clickup(event: any, item: any): void;
+    clickup(event: any, item: any, i: any, max: any): void;
+    private resize(flag);
     keyup(event: any): void;
     selectTab(item: any): void;
 }

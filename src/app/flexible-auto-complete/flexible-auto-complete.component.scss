@@ -1,6 +1,14 @@
 :host {
     display: table;
-    width: 100%;
+    position: relative;
+
+    &.has-data {
+        -webkit-transition: width 3s ease-in-out;
+        -moz-transition: width 3s ease-in-out;
+        -o-transition: width 3s ease-in-out;
+        transition: width 3s ease-in-out;
+        width: 100%;
+    }
 
     label {
         display: flex;
@@ -44,6 +52,16 @@
         border-radius: 2px;
         background-color: #fff;
         overflow: hidden;
+        width: 100%;
+
+        -webkit-transition: height 3s ease-in-out;
+        -moz-transition: height 3s ease-in-out;
+        -o-transition: height 3s ease-in-out;
+        transition: height 3s ease-in-out;
+
+        &.fix-height {
+            position: absolute;
+        }
 
         li {
             box-sizing: border-box;

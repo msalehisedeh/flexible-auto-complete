@@ -10,12 +10,19 @@
 <ul *ngIf="filteredData.length" 
     role="list" 
     class="viewport" 
+    [class.fix-height]="allowdropdown"
     [style.max-width]="direction === 'horizontal' ? viewport : null"
     [style.overflow-x]="direction === 'horizontal' ? 'auto' : null"
     [style.flex-direction]="direction === 'horizontal' ? 'row' : 'column'"
     [style.max-height]="direction === 'vertical' ? viewport : null"
     [style.overflow-y]="direction === 'vertical' ? 'auto' : null">
-    <li role="listitem" tabindex="0" *ngFor="let item of filteredData" (keyup)="clickup($event, item)" (click)="selectTab(item)">
+    <li 
+        *ngFor="let item of filteredData; let i = index" 
+        role="listitem" 
+        tabindex="0" 
+        [id]="'item' + i" 
+        (keyup)="clickup($event, item, i, filteredData.length)" 
+        (click)="selectTab(item)">
         <ng-container  
             [ngTemplateOutlet]="template ? template : defaultTemplate" 
             [ngTemplateOutletContext]="{data: item}"></ng-container>

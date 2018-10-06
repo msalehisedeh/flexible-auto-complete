@@ -265,6 +265,22 @@ export class AppComponent {
       "company": "BIOSPAN",
       "email": "ramosengland@biospan.com",
       "phone": "+1 (883) 524-3172"
+    },
+    {
+      "_id": "5aaa0d8de72edc57a2ffa2a0",
+      "index": 0,
+      "guid": "5c4df3d6-88cc-4833-8577-cbcba31e5b72",
+      "isActive": false,
+      "balance": "$2,866.70",
+      "picture": "https://image.flaticon.com/icons/png/128/145/145862.png",
+      "age": 9,
+      "eyeColor": "blue",
+      "fname": "Mathew",
+      "lname": "Menendez",
+      "gender": "male",
+      "company": "EURON",
+      "email": "mathismorales@euron.com",
+      "phone": "+1 (940) 531-2138"
     }
   ];
   
@@ -272,6 +288,9 @@ export class AppComponent {
 
   }
 
+  onsearch(event) {
+    this.events.push("Searching for " +event);
+  }
   onselection(event) {
     this.events.push(event);
   }

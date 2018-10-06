@@ -9,7 +9,8 @@ import {
 	Input,
 	Output,
 	AfterViewInit,
-	EventEmitter
+	EventEmitter,
+	ElementRef
 } from '@angular/core';
 
 import { Http } from '@angular/http';
@@ -34,6 +35,12 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	
 	@Input("prefetchdata")
 	public prefetchdata = false;
+	
+	@Input("animateonresult")
+	public animateonresult = false;
+	
+	@Input("allowdropdown")
+	public allowdropdown = false;
 	
 	@Input('keymap')
     public keymap: any[] = [];
@@ -68,9 +75,13 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	@Output("onselect")
 	onselect = new EventEmitter();
 
-	constructor(private http: Http) {}
+	@Output("onsearch")
+	onsearch = new EventEmitter();
+
+	constructor(private http: Http, private el: ElementRef) {}
 	
 	ngAfterViewInit() {
+		this.resize(false);
 		if (this.prefetchdata && this.source) {
 			this.http.get(this.source).subscribe(
 				(result: any) => {
@@ -92,12 +103,27 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 		return x && (typeof x === "string") ? JSON.parse(x) : x;
 	}
 
-	clickup(event, item) {
+	clickup(event, item, i, max) {
 		const code = event.which;
 		
 		if (code === 13) {
 			this.selectTab( item );
-		}	
+		} else if (code === 38 && i>0) { // arrow up
+			document.getElementById("item" + ( i - 1)).focus();
+		} else if (code === 40 && i < max) { // arrow down
+			document.getElementById("item" + ( i + 1)).focus();
+		}
+	}
+	private resize(flag) {
+		if (this.animateonresult) {
+			if (flag) {
+				this.el.nativeElement.classList.add("has-data");
+			} else {
+				this.el.nativeElement.classList.remove("has-data");
+			}
+		} else {
+			this.el.nativeElement.classList.add("has-data");
+		}
 	}
 	keyup(event) {
         const code = event.which;
@@ -121,6 +147,12 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 								if (response) {
 									this.data = response;
 									this.filteredData = response;
+									if (this.filteredData.length) {
+										this.onsearch.emit(key);
+										setTimeout(()=> this.resize(true), 66);
+									} else {
+										setTimeout(()=> this.resize(false), 66);
+									}
 								}
 							}
 						);
@@ -138,9 +170,16 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 							}
 							return keep;
 						});
+						if (this.filteredData.length) {
+							this.onsearch.emit(key);
+							setTimeout(()=> this.resize(true), 66);
+						} else {
+							setTimeout(()=> this.resize(false), 66);
+						}
 					}
 				} else {
 					this.filteredData = [];
+					setTimeout(()=> this.resize(false), 66);
 				}
 			}, this.delayby);
 		}
@@ -148,6 +187,7 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	selectTab(item) {
 		this.onselect.emit(item);
 		this.filteredData = [];
+		setTimeout(()=> this.resize(false), 66);
 		this.entry = "";
 	}
 }

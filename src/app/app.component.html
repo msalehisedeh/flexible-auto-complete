@@ -4,7 +4,7 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<p>To complete your evaluation of this component, please type any portion of names: [Mathis,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
+<p>To complete your evaluation of this component, please type any portion of names: [Mathis,Mathew,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
 <flexible-auto-complete 
   icon="fa fa-search"
   message="find user" 
@@ -12,10 +12,13 @@
   direction="vertical"
   delayby="300"
   triggeron="2"
+  animateonresult="true"
+  allowdropdown="true"
   viewport="200px"
   [template]="tab2" 
   [data]="data"
   [keymap]="['fname','lname']"
+  (onsearch)="onsearch($event)"
   (onselect)="onselection($event)"></flexible-auto-complete>
 
 <ng-template #tab2 let-detail="data">
