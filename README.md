@@ -11,6 +11,9 @@ Please send your requests or comments through the link provided below:
 [Live Demo](https://flexible-auto-complete.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-auto-complete) | [Comments/Requests](https://github.com/msalehisedeh/flexible-auto-complete/issues)
 
 
+# Version 1.3.0
+It was brought to my attention that some users have trouble using my components in their angular 6 environment. Since I had only updated few dependencies when moved to Angular 6, I am thinking dependencies are causing issues. So, for this release, I am updating all dependencies to what Angular 6 applications are expecting to have. Please let me know if this is fixing or not fixing any issues you are facing.
+
 # Version 1.2.0
 Added onsearch event to be triggered when a search request is sent out. Modified key event to select next/previous result on arrow up/down keys. Added **allowdropdown** and **animateonresult** attributes to create a dropdown like search result and expand search field width when there is a result. 
 
