@@ -6,6 +6,7 @@ export declare class FlexibleAutoCompleteComponent implements AfterViewInit {
     private interval;
     entry: string;
     filteredData: any[];
+    flexibleId: string;
     placeholder: string;
     remotepath: string;
     prefetchdata: boolean;

@@ -1,8 +1,9 @@
 
-<label for="">
+<label [for]="flexibleId">
     <span class="off-screen" [textContent]="message"></span>
     <input [value]="entry"
         [placeholder]= "placeholder"
+		[id]="flexibleId"
         (keyup)="keyup($event)" />
     <span [class]="icon ? icon : null" *ngIf="filteredData.length == 0" [class.icon]="true" area-hidden="true"></span>
     <span class="icon fa fa-reply" *ngIf="icon && filteredData.length" area-hidden="true"></span>
@@ -20,7 +21,7 @@
         *ngFor="let item of filteredData; let i = index" 
         role="listitem" 
         tabindex="0" 
-        [id]="'item' + i" 
+        [id]="flexibleId +'-item-' + i" 
         (keyup)="clickup($event, item, i, filteredData.length)" 
         (click)="selectTab(item)">
         <ng-container  

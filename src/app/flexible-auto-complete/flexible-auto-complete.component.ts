@@ -27,6 +27,9 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	entry = "";
 	filteredData: any[] = [];
 
+	@Input("flexibleId")
+	public flexibleId = "flexible";
+	
 	@Input("placeholder")
 	public placeholder = "";
 	
@@ -108,10 +111,14 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 		
 		if (code === 13) {
 			this.selectTab( item );
-		} else if (code === 38 && i>0) { // arrow up
-			document.getElementById("item" + ( i - 1)).focus();
+		} else if (code === 38) { // arrow up
+			if(i > 0) {
+				document.getElementById(this.flexibleId + "-item-" + ( i - 1)).focus();
+			} else {
+				document.getElementById(this.flexibleId).focus();
+			}
 		} else if (code === 40 && i < max) { // arrow down
-			document.getElementById("item" + ( i + 1)).focus();
+			document.getElementById(this.flexibleId + "-item-" + ( i + 1)).focus();
 		}
 	}
 	private resize(flag) {
@@ -131,6 +138,12 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 		if (code === 13) {
 			if (this.filteredData && this.filteredData.length) {
 				this.selectTab( this.filteredData[0] );
+			}
+		} else if (code === 38) { // arrow up
+			// do nothing
+		} else if (code === 40) { // arrow down
+			if (this.filteredData && this.filteredData.length){
+				document.getElementById(this.flexibleId + "-item-1").focus();
 			}
 		} else {
 			this.entry = event.target.value;

@@ -52,12 +52,12 @@ EXPORTS:
 |viewport        |Optional  | View port max size of resulting display area.                      |
 |template        |Optional  | If provided, will be used to display result according to template layout.|
 |source          |Required  | URL to fetch data from.                                            |
+|flexibleId      |Optional  | ID for the search. Will  allow using more than one search in a page. |
 |data            |Optional  | if 'source' URL is not supplied, supplied 'data' will be used to do type ahead lookup. |
 |remotepath      |Optional  | instructs the auto complete to access results through given value. By default, response.body will be used to get the results.  If remotepath contains dot, result will be traverse down to its final destination. for example, "body.data" will fetch data from "response.body.data".  Default value is "body".  |
 |prefetchdata    |Optional  | Will call the remote source URL without additional arguments and saves the result for filtering when user types in charachters. |
 |keymap          |Optional  | List of keys to be used when trying to match up and filter/display data in the response received or in the default data supplied.   |
 
- 
 
 ## Events
 | Event   |Description                                                                           |
