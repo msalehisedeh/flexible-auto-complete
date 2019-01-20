@@ -6,24 +6,12 @@ With flexible auto-complete, you can configure an auto-complete to perform task 
 
 **NOTE:** Starting with version 1.1.0 this library is compatible with Angular 6+.
 
+**NOTE:** Starting with version 1.3.1 you need to import this library through @sedeh/flexible-auto-complete.
+
 Please send your requests or comments through the link provided below:
 
 [Live Demo](https://flexible-auto-complete.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-auto-complete) | [Comments/Requests](https://github.com/msalehisedeh/flexible-auto-complete/issues)
 
-
-# Version 1.3.0
-It was brought to my attention that some users have trouble using my components in their angular 6 environment. Since I had only updated few dependencies when moved to Angular 6, I am thinking dependencies are causing issues. So, for this release, I am updating all dependencies to what Angular 6 applications are expecting to have. Please let me know if this is fixing or not fixing any issues you are facing.
-
-# Version 1.2.0
-Added onsearch event to be triggered when a search request is sent out. Modified key event to select next/previous result on arrow up/down keys. Added **allowdropdown** and **animateonresult** attributes to create a dropdown like search result and expand search field width when there is a result. 
-
-# Version 1.1.0
-Updated libraries to become compatible with Angular 6+. 
-
-# Version 1.0.1
-Fixed few issues and added attributes to make the auto-fill function better.
-
-# Version 1.0.0
 
 ```javascript
 MODULE:
@@ -151,10 +139,22 @@ CSS Example:
 }
 ```
 
+## Version History
+
+| Version | Description                                                                                              |
+|---------|----------------------------------------------------------------------------------------------------------|
+| 1.3.1   | Updated dependencies.                                                                                    |
+| 1.3.0   | It was brought to my attention that some users have trouble using my components in their angular 6 environment. Since I had only updated few dependencies when moved to Angular 6, I am thinking dependencies are causing issues. So, for this release, I am updating all dependencies to what Angular 6 applications are expecting to have. Please let me know if this is fixing or not fixing any issues you are facing. |
+| 1.2.0   | Added onsearch event to be triggered when a search request is sent out. Modified key event to select next/previous result on arrow up/down keys. Added **allowdropdown** and **animateonresult** attributes to create a dropdown like search result and expand search field width when there is a result.  |
+| 1.1.0   | Updated libraries to become compatible with Angular 6+.                                                  |
+| 1.0.1   | Fixed few issues and added attributes to make the auto-fill function better.                             |
+| 1.0.0   | Initial release.                                                                                         |
+
+
 ![alt text](https://raw.githubusercontent.com/msalehisedeh/flexible-auto-complete/master/sample.png  "What you would see when a flexible auto-complete is used")
 
 
-### How to include font-awesome in your project?
+## How to include font-awesome in your project?
 
 In your project root folder, find and open the file 'angular-cli.json' in any editor 
 Locate the styles[] array and add font-awesome references directory. like:
