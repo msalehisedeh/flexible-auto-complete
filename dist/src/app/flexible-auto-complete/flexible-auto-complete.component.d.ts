@@ -22,13 +22,13 @@ export declare class FlexibleAutoCompleteComponent implements AfterViewInit {
     template: any;
     source: string;
     data: any;
-    onselect: EventEmitter<{}>;
-    onsearch: EventEmitter<{}>;
+    onselect: EventEmitter<any>;
+    onsearch: EventEmitter<any>;
     constructor(http: Http, el: ElementRef);
     ngAfterViewInit(): void;
-    private traverseResult(response);
+    private traverseResult;
     clickup(event: any, item: any, i: any, max: any): void;
-    private resize(flag);
+    private resize;
     keyup(event: any): void;
     selectTab(item: any): void;
 }

@@ -143,7 +143,7 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 			// do nothing
 		} else if (code === 40) { // arrow down
 			if (this.filteredData && this.filteredData.length){
-				document.getElementById(this.flexibleId + "-item-1").focus();
+				document.getElementById(this.flexibleId + "-item-0").focus();
 			}
 		} else {
 			this.entry = event.target.value;
