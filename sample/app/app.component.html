@@ -1,0 +1,43 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+  <div  class="resources">
+    <a href="https://www.npmjs.com/package/@sedeh/flexible-auto-complete">npm install @sedeh/flexible-auto-complete</a>
+    <p>Tested On Safari, Chrome, Mozilla, and IE11 browsers.</p>
+  </div>
+
+<p>To complete your evaluation of this component, please type any portion of names: [Mathis,Mathew,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
+<flexible-auto-complete 
+  icon="fa fa-search"
+  message="find user" 
+  placeholder="Please enter a name" 
+  direction="vertical"
+  [delayby]="300"
+  [triggeron]="2"
+  [animateonresult]="true"
+  [allowdropdown]="true"
+  viewport="200px"
+  [template]="tab2" 
+  [data]="data"
+  [keymap]="['fname','lname']"
+  (onsearch)="onsearch($event)"
+  (onselect)="onselection($event)"></flexible-auto-complete>
+
+<ng-template #tab2 let-detail="data">
+  <img [src]="detail.picture" width="10px" />
+  <span class="info">
+      <span><span class="bold">Name:</span> {{detail.fname}} {{detail.lname}}</span>
+      <span><span class="bold">Age:</span> {{detail.age}}</span>
+      <span><span class="fa fa-phone" aria-hidden="true"></span>: {{detail.phone}}</span>
+    </span>
+</ng-template>
+
+<fieldset class="log-field">
+  <legend>Event Logs</legend>
+  <ul class="logger">
+  <li *ngFor="let x of events" [textContent]="x | json"></li>
+</ul>
+</fieldset>

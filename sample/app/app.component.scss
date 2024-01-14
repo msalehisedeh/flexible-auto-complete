@@ -1,0 +1,62 @@
+
+.logger {
+    box-sizing: border-box;
+    display: inline-block;
+    max-height: 222px;
+    overflow-y: auto;
+    margin-bottom: 45px;
+    width: 100%;
+}
+h3 {
+    margin: 0 0 20px 0;
+}
+.resources {
+  text-align: center;
+}
+
+fieldset {
+    box-sizing: border-box;
+    display: table;
+    float: left;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.log-field {
+    width: 100%;
+    margin-top:20px;
+}
+::ng-deep .viewport {
+    li {
+        display: flex;
+        flex-direction: row;
+
+        img {
+            border-radius: 50%;
+            border: 1px splid red;
+            float: left;
+            width: 25px;
+            height: 25px;
+        }
+        .info {
+            margin-right: 22px;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            float: left;
+            margin-left: 5px;
+            flex: 1;
+
+            .bold {
+                font-weight: bold;
+            }
+        }
+        &:hover,&:focus {
+            img {
+                background-color: #fff;
+            }
+            .info {
+                color: #fff;
+            }
+        }
+    }
+}
