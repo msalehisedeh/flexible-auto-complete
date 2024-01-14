@@ -14,19 +14,6 @@ Please send your requests or comments through the link provided below:
 [NPM](https://www.npmjs.com/package/@sedeh/flexible-auto-complete) | 
 [Comments/Requests](https://github.com/msalehisedeh/flexible-auto-complete/issues)
 
-
-```javascript
-MODULE:
-  FlexibleAutoCompleteModule
-
-EXPORTS:
-  FlexibleAutoCompleteComponent
-```
-
-## Features
-* Responsive
-* ADA Compliant
-* Configurable
-
+**I appreciate comments and requests.** please go to provided link and make your comments.
 
 ![alt text](https://raw.githubusercontent.com/msalehisedeh/flexible-auto-complete/master/sample.png  "What you would see when a flexible auto-complete is used")

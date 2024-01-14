@@ -16,9 +16,6 @@ Please send your requests or comments through the link provided below:
 
 
 ```javascript
-MODULE:
-  FlexibleAutoCompleteModule
-
 EXPORTS:
   FlexibleAutoCompleteComponent
 ```
