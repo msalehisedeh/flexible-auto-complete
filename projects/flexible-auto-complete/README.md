@@ -143,6 +143,7 @@ CSS Example:
 
 | Version | Description                                                                                              |
 |---------|----------------------------------------------------------------------------------------------------------|
+| 3.2.1   | managin dropdown in mobile view port and bringing items into view.                                       |
 | 3.2.0   | added option to show results and display result in correct position on screen.                           |
 | 3.1.0   | fixed logical display issues                                                                             |
 | 3.0.0   | Upgrading to Angular 15                                                                                  |

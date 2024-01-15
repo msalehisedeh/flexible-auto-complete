@@ -47,6 +47,9 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	@Input("prefetchdata")
 	public prefetchdata = false;
 	
+	@Input("forceResultIntoView")
+	public forceResultIntoView = false;
+	
 	@Input("animateonresult")
 	set animateonresult(value: boolean) {
 		throw 'animateonresult is deprecated';
@@ -164,6 +167,11 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 			}
 			this.flipOrigin = ((dr.width - (sr.x+sr.width)) < sr.width);
 			this.filteredData = result;
+			if (this.forceResultIntoView) {
+				setTimeout(() => {
+					source.parentNode.nextSibling.scrollIntoView();
+				}, 66);
+			}
 		}
 	}
 	onFocus(event: any) {

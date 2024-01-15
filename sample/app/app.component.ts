@@ -15,6 +15,7 @@ export class AppComponent {
   trigger = 2;
   allowdropdown = true;
   showCounter = false;
+  forceResultIntoView = false;
 
   data = [
     {
@@ -27,7 +28,7 @@ export class AppComponent {
       "age": 39,
       "eyeColor": "blue",
       "fname": "Mathis",
-      "lname": "Morales",
+      "lname": "Morales De santino JR",
       "gender": "male",
       "company": "EURON",
       "email": "mathismorales@euron.com",
@@ -317,6 +318,7 @@ export class AppComponent {
     switch(attr) {
       case 'allowdropdown' : this.allowdropdown = checked; break;
       case 'showCounter' : this.showCounter = checked; break;
+      case 'forceResultIntoView' : this.forceResultIntoView = checked; break;
     }
   }
   onsearch(event: any) {

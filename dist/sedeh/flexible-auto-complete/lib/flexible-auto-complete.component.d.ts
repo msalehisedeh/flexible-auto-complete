@@ -14,6 +14,7 @@ export declare class FlexibleAutoCompleteComponent implements AfterViewInit {
     placeholder: string;
     remotepath: string;
     prefetchdata: boolean;
+    forceResultIntoView: boolean;
     set animateonresult(value: boolean);
     allowdropdown: boolean;
     showCounter: boolean;
@@ -41,5 +42,5 @@ export declare class FlexibleAutoCompleteComponent implements AfterViewInit {
     selectTab(item: any): void;
     private search;
     static ɵfac: i0.ɵɵFactoryDeclaration<FlexibleAutoCompleteComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<FlexibleAutoCompleteComponent, "flexible-auto-complete", never, { "flexibleId": "flexibleId"; "placeholder": "placeholder"; "remotepath": "remotepath"; "prefetchdata": "prefetchdata"; "animateonresult": "animateonresult"; "allowdropdown": "allowdropdown"; "showCounter": "showCounter"; "keymap": "keymap"; "icon": "icon"; "message": "message"; "direction": "direction"; "delayby": "delayby"; "triggeron": "triggeron"; "viewport": "viewport"; "template": "template"; "source": "source"; "data": "data"; }, { "onselect": "onselect"; "onsearch": "onsearch"; }, never, never, true, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<FlexibleAutoCompleteComponent, "flexible-auto-complete", never, { "flexibleId": "flexibleId"; "placeholder": "placeholder"; "remotepath": "remotepath"; "prefetchdata": "prefetchdata"; "forceResultIntoView": "forceResultIntoView"; "animateonresult": "animateonresult"; "allowdropdown": "allowdropdown"; "showCounter": "showCounter"; "keymap": "keymap"; "icon": "icon"; "message": "message"; "direction": "direction"; "delayby": "delayby"; "triggeron": "triggeron"; "viewport": "viewport"; "template": "template"; "source": "source"; "data": "data"; }, { "onselect": "onselect"; "onsearch": "onsearch"; }, never, never, true, never>;
 }

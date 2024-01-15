@@ -41,24 +41,46 @@
         (keyup)="keyup($event)"
         (click)="click($event, 'showCounter')" /> 
       <span>Show counter</span>
+    </label> 
+    <label for="forceResultIntoView">
+      <input 
+        type="checkbox" 
+        name="forceResultIntoView" 
+        id="forceResultIntoView" 
+        [value]="forceResultIntoView" 
+        [checked]="forceResultIntoView ? true: null" 
+        (keyup)="keyup($event)"
+        (click)="click($event, 'forceResultIntoView')" /> 
+      <span>Force result into view</span>
     </label>  
 </fieldset>
-<p>To complete your evaluation of this component, please type any portion of names: [Mathis,Mathew,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
-<flexible-auto-complete 
-  icon="fa fa-search"
-  message="find user" 
-  placeholder="Please enter a name" 
-  direction="vertical"
-  [delayby]="300"
-  [triggeron]="trigger"
-  [allowdropdown]="allowdropdown"
-  [showCounter]="showCounter"
-  viewport="200px"
-  [template]="tab2" 
-  [data]="data"
-  [keymap]="['fname','lname']"
-  (onsearch)="onsearch($event)"
-  (onselect)="onselection($event)"></flexible-auto-complete>
+<div class="content">
+  <p>To complete your evaluation of this component, please type any portion of names: [Mathis,Mathew,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
+  <flexible-auto-complete 
+    icon="fa fa-search"
+    message="find user" 
+    placeholder="Please enter a name" 
+    direction="vertical"
+    [delayby]="300"
+    [triggeron]="trigger"
+    [forceResultIntoView]="forceResultIntoView"
+    [allowdropdown]="allowdropdown"
+    [showCounter]="showCounter"
+    viewport="200px"
+    [template]="tab2" 
+    [data]="data"
+    [keymap]="['fname','lname']"
+    (onsearch)="onsearch($event)"
+    (onselect)="onselection($event)"></flexible-auto-complete>
+  
+  <fieldset class="log-field">
+    <legend>Event Logs</legend>
+    <ul class="logger">
+    <li *ngFor="let x of events" [textContent]="x | json"></li>
+  </ul>
+  </fieldset>
+</div>
+
 
 <ng-template #tab2 let-detail="data">
   <img [src]="detail.picture" width="10px" />
@@ -68,10 +90,3 @@
       <span><span class="fa fa-phone" aria-hidden="true"></span>: {{detail.phone}}</span>
     </span>
 </ng-template>
-
-<fieldset class="log-field">
-  <legend>Event Logs</legend>
-  <ul class="logger">
-  <li *ngFor="let x of events" [textContent]="x | json"></li>
-</ul>
-</fieldset>

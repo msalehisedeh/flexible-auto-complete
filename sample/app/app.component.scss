@@ -13,7 +13,10 @@ h3 {
 .resources {
   text-align: center;
 }
-
+.content {
+    display: table;
+    width: 100%;
+}
 fieldset {
     box-sizing: border-box;
     display: table;
