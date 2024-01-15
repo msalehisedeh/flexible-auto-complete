@@ -30,6 +30,7 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	private interval: any;
 
 	entry = "";
+	focusedItem = -1;
 	filteredData: any[] = [];
 
 	@Input("flexibleId")
@@ -111,6 +112,20 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 		return x && (typeof x === "string") ? JSON.parse(x) : x;
 	}
 
+	onBlur(event: any) {
+		setTimeout(() => {
+			if (this.filteredData.length && (this.focusedItem < 0)) {
+				this.focusedItem = -1;
+				this.filteredData = [];
+			}
+		}, 66);
+	}
+	onBlurItem(event: any, i: number) {
+		if (i === this.filteredData.length - 1) {
+			this.focusedItem = -1;
+			this.filteredData = [];
+		}
+	}
 	clickup(event: any, item: any, i: number, max: number) {
 		const code = event.which;
 		
@@ -124,7 +139,11 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 			}
 		} else if (code === 40 && i < max) { // arrow down
 			document.getElementById(this.flexibleId + "-item-" + ( i + 1))?.focus();
-		}
+		} else if (code === 9) { // tab
+			if (i < max) {
+				document.getElementById(this.flexibleId + "-item-" + ( i ))?.focus();
+			}
+		} 
 	}
 	private resize(flag: boolean) {
 		if (this.animateonresult) {
@@ -143,6 +162,12 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 		if (code === 13) {
 			if (this.filteredData && this.filteredData.length) {
 				this.selectTab( this.filteredData[0] );
+			} else {
+				this.search(event);
+			}
+		} else if (code === 9) { // tab
+			if (this.focusedItem < 0) {
+				this.filteredData = [];
 			}
 		} else if (code === 38) { // arrow up
 			// do nothing
@@ -151,61 +176,65 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 				document.getElementById(this.flexibleId + "-item-0")?.focus();
 			}
 		} else {
-			this.entry = event.target.value;
-			if (this.interval) {
-				clearTimeout(this.interval);
-			}
-			this.interval = setTimeout( () => {
-				const key = this.entry.toLowerCase();
-				if (key.length > this.triggeron) {
-					if (!this.prefetchdata && this.source) {
-						this.http.get(this.source + key).subscribe(
-							(result: any) => {
-								const response = this.traverseResult(result);
-								if (response) {
-									this.data = response;
-									this.filteredData = response;
-									if (this.filteredData.length) {
-										this.onsearch.emit(key);
-										setTimeout(()=> this.resize(true), 66);
-									} else {
-										setTimeout(()=> this.resize(false), 66);
-									}
-								}
-							}
-						);
-					} else if (this.data) {
-						this.filteredData = this.data.filter( (item: any) => {
-							let keep = false;
-							for(let j = 0; j < this.keymap.length; j++) {
-								const k = this.keymap[j];
-								let tmp = item[k]
-								const v = tmp ? tmp.toLowerCase() : undefined;
-								if (v && v.indexOf(key) >= 0) {
-									keep = true;
-									break;
-								}
-							}
-							return keep;
-						});
-						if (this.filteredData.length) {
-							this.onsearch.emit(key);
-							setTimeout(()=> this.resize(true), 66);
-						} else {
-							setTimeout(()=> this.resize(false), 66);
-						}
-					}
-				} else {
-					this.filteredData = [];
-					setTimeout(()=> this.resize(false), 66);
-				}
-			}, this.delayby);
+			this.focusedItem = -1;
+			this.search(event);
 		}
 	}
 	selectTab(item: any) {
 		this.onselect.emit(item);
+		this.focusedItem = -1;
 		this.filteredData = [];
 		setTimeout(()=> this.resize(false), 66);
-		this.entry = "";
+	}
+	private search(event: any) {
+		this.entry = event.target.value;
+		if (this.interval) {
+			clearTimeout(this.interval);
+		}
+		this.interval = setTimeout( () => {
+			const key = this.entry.toLowerCase();
+			if (key.length > this.triggeron) {
+				if (!this.prefetchdata && this.source) {
+					this.http.get(this.source + key).subscribe(
+						(result: any) => {
+							const response = this.traverseResult(result);
+							if (response) {
+								this.data = response;
+								this.filteredData = response;
+								if (this.filteredData.length) {
+									this.onsearch.emit(key);
+									setTimeout(()=> this.resize(true), 66);
+								} else {
+									setTimeout(()=> this.resize(false), 66);
+								}
+							}
+						}
+					);
+				} else if (this.data) {
+					this.filteredData = this.data.filter( (item: any) => {
+						let keep = false;
+						for(let j = 0; j < this.keymap.length; j++) {
+							const k = this.keymap[j];
+							let tmp = item[k]
+							const v = tmp ? tmp.toLowerCase() : undefined;
+							if (v && v.indexOf(key) >= 0) {
+								keep = true;
+								break;
+							}
+						}
+						return keep;
+					});
+					if (this.filteredData.length) {
+						this.onsearch.emit(key);
+						setTimeout(()=> this.resize(true), 66);
+					} else {
+						setTimeout(()=> this.resize(false), 66);
+					}
+				}
+			} else {
+				this.filteredData = [];
+				setTimeout(()=> this.resize(false), 66);
+			}
+		}, this.delayby);
 	}
 }

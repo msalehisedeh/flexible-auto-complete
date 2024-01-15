@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FlexibleAutoCompleteComponent } from '@sedeh/flexible-auto-complete';
+import { FlexibleAutoCompleteComponent } from './flexible-auto-complete/flexible-auto-complete.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,6 +12,9 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'Flexible auto-complete';
   events: any[] = [];
+  trigger = 2;
+  animateonresult = true;
+  allowdropdown = true;
 
   data = [
     {
@@ -292,6 +295,31 @@ export class AppComponent {
 
   }
 
+  keyup(event: any) {
+    const code = event.which;
+    if (code === 13) {
+      event.target.click();
+		}
+  }
+  textkeyup(event: any) {
+    const code = event.which;
+    if (code === 13) {
+      this.onTriggerEntered(event);
+		}
+  }
+  onTriggerEntered(event: any) {
+    if (event.target.value.length) {
+      this.trigger = isNaN(event.target.value) ? 2 : parseInt(event.target.value, 10);
+    }
+  }
+  click(event: any, attr: any) {
+    if (attr === 'animateonresult') {
+      this.animateonresult = event.target.checked;
+    }
+    if (attr === 'allowdropdown') {
+      this.allowdropdown = event.target.checked;
+    }
+  }
   onsearch(event: any) {
     this.events.push("Searching for " +event);
   }

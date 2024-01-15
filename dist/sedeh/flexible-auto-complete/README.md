@@ -16,9 +16,6 @@ Please send your requests or comments through the link provided below:
 
 
 ```javascript
-MODULE:
-  FlexibleAutoCompleteModule
-
 EXPORTS:
   FlexibleAutoCompleteComponent
 ```
@@ -145,6 +142,7 @@ CSS Example:
 
 | Version | Description                                                                                              |
 |---------|----------------------------------------------------------------------------------------------------------|
+| 3.1.0   | fixed logical display issues                                                                             |
 | 3.0.0   | Upgrading to Angular 15                                                                                  |
 | 2.0.0   | Upgrading to Angular 8                                                                                   |
 | 1.3.1   | Updated dependencies.                                                                                    |

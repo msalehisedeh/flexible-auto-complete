@@ -9,6 +9,40 @@
     <p>Tested On Safari, Chrome, Mozilla, and IE11 browsers.</p>
   </div>
 
+  <fieldset class="pick-points">
+    <legend>Options:</legend>
+    <label for="trigger">Trigger search by characters
+      <input 
+        type="text" 
+        class="trigger"
+        placeholder="trigger by number of characters"
+        [value]="trigger" 
+        (keyup)="textkeyup($event)"
+        (input)="onTriggerEntered($event)"  />
+    </label>
+    <label for="animateonresult">
+      <input 
+        type="checkbox" 
+        name="animateonresult" 
+        id="animateonresult" 
+        [value]="animateonresult" 
+        [checked]="animateonresult ? true: null" 
+        (keyup)="keyup($event)"
+        (click)="click($event, 'animateonresult')" /> 
+      <span>animate on result</span>
+    </label>  
+    <label for="allowdropdown">
+      <input 
+        type="checkbox" 
+        name="allowdropdown" 
+        id="allowdropdown" 
+        [value]="allowdropdown" 
+        [checked]="allowdropdown ? true: null" 
+        (keyup)="keyup($event)"
+        (click)="click($event, 'allowdropdown')" /> 
+      <span>allow dropdown</span>
+    </label>  
+</fieldset>
 <p>To complete your evaluation of this component, please type any portion of names: [Mathis,Mathew,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
 <flexible-auto-complete 
   icon="fa fa-search"
@@ -16,9 +50,9 @@
   placeholder="Please enter a name" 
   direction="vertical"
   [delayby]="300"
-  [triggeron]="2"
-  [animateonresult]="true"
-  [allowdropdown]="true"
+  [triggeron]="trigger"
+  [animateonresult]="animateonresult"
+  [allowdropdown]="allowdropdown"
   viewport="200px"
   [template]="tab2" 
   [data]="data"

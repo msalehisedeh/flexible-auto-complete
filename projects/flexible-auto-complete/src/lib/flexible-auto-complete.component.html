@@ -4,6 +4,7 @@
     <input [value]="entry"
         [placeholder]= "placeholder"
 		[id]="flexibleId"
+        (blur)="onBlur($event)"
         (keyup)="keyup($event)" />
     <span [class]="icon ? icon : null" *ngIf="filteredData.length == 0" [class.icon]="true" area-hidden="true"></span>
     <span class="icon fa fa-reply" *ngIf="icon && filteredData.length" area-hidden="true"></span>
@@ -22,6 +23,8 @@
         role="listitem" 
         tabindex="0" 
         [id]="flexibleId +'-item-' + i" 
+        (focus)="focusedItem = i"
+        (blur)="onBlurItem($event, i)"
         (keyup)="clickup($event, item, i, filteredData.length)" 
         (click)="selectTab(item)">
         <ng-container  
