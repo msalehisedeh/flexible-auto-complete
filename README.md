@@ -10,7 +10,7 @@ With flexible auto-complete, you can configure an auto-complete to perform task 
 
 Please send your requests or comments through the link provided below:
 
-[Live Demo](https://flexible-auto-complete.stackblitz.io)  | 
+[Live Demo](https://stackblitz.com/edit/flexible-auto-complete?file=src%2Fapp%2Fapp.component.ts)  | 
 [NPM](https://www.npmjs.com/package/@sedeh/flexible-auto-complete) | 
 [Comments/Requests](https://github.com/msalehisedeh/flexible-auto-complete/issues)
 
