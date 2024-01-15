@@ -4,6 +4,7 @@
     <input [value]="entry"
         [placeholder]= "placeholder"
 		[id]="flexibleId"
+        (focus)="onFocus($event)"
         (blur)="onBlur($event)"
         (keyup)="keyup($event)" />
     <span [class]="icon ? icon : null" *ngIf="filteredData.length == 0" [class.icon]="true" area-hidden="true"></span>
@@ -15,9 +16,12 @@
     [class.fix-height]="allowdropdown"
     [style.max-width]="direction === 'horizontal' ? viewport : null"
     [style.overflow-x]="direction === 'horizontal' ? 'auto' : null"
+    [style.bottom]="verticalPosition ? verticalPosition : null"
+    [style.right]="flipOrigin ? 0 : null"
     [style.flex-direction]="direction === 'horizontal' ? 'row' : 'column'"
     [style.max-height]="direction === 'vertical' ? viewport : null"
     [style.overflow-y]="direction === 'vertical' ? 'auto' : null">
+    <span *ngIf="showCounter" class="display-counter">found {{ filteredData.length }} item(s)</span>
     <li 
         *ngFor="let item of filteredData; let i = index" 
         role="listitem" 

@@ -2,13 +2,6 @@
     display: table;
     position: relative;
 
-    &.has-data {
-        -webkit-transition: width 3s ease-in-out;
-        -moz-transition: width 3s ease-in-out;
-        -o-transition: width 3s ease-in-out;
-        transition: width 3s ease-in-out;
-    }
-
     label {
         display: flex;
         flex-direction: row;
@@ -27,8 +20,7 @@
         }
         .icon {
             flex: 0 0 15px;
-            margin-right: 5px;
-            margin-top: 3px;
+            margin: 3px 5px;
             color: #ddd;
         }
     }
@@ -53,13 +45,18 @@
         overflow: hidden;
         min-width: 100%;
 
-        -webkit-transition: height 3s ease-in-out;
-        -moz-transition: height 3s ease-in-out;
-        -o-transition: height 3s ease-in-out;
-        transition: height 3s ease-in-out;
-
         &.fix-height {
             position: absolute;
+        }
+        .display-counter {
+            text-align: right;
+            display: block;
+            width: 100%;
+            font-size: 12px;
+            font-style: italic;
+            color: #918e8e;
+            padding: 2px 5px;
+            box-sizing: border-box;
         }
 
         li {

@@ -36,6 +36,7 @@ EXPORTS:
 |triggeron       |Optional  | Trigger lookup request after specified number of charachters reached. |
 |animateonresult |Optional  | Expand field and the display result if type ahead result has items.|
 |allowdropdown   |Optional  | Display result in a dropdown fashion or push down other contents.  |
+|showCounter     |Optional  | Display results counter on top right corner of results list.       |
 |viewport        |Optional  | View port max size of resulting display area.                      |
 |template        |Optional  | If provided, will be used to display result according to template layout.|
 |source          |Required  | URL to fetch data from.                                            |
@@ -142,6 +143,7 @@ CSS Example:
 
 | Version | Description                                                                                              |
 |---------|----------------------------------------------------------------------------------------------------------|
+| 3.2.0   | added option to show results and display result in correct position on screen.                           |
 | 3.1.0   | fixed logical display issues                                                                             |
 | 3.0.0   | Upgrading to Angular 15                                                                                  |
 | 2.0.0   | Upgrading to Angular 8                                                                                   |

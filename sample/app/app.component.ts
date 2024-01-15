@@ -13,8 +13,8 @@ export class AppComponent {
   title = 'Flexible auto-complete';
   events: any[] = [];
   trigger = 2;
-  animateonresult = true;
   allowdropdown = true;
+  showCounter = false;
 
   data = [
     {
@@ -313,11 +313,10 @@ export class AppComponent {
     }
   }
   click(event: any, attr: any) {
-    if (attr === 'animateonresult') {
-      this.animateonresult = event.target.checked;
-    }
-    if (attr === 'allowdropdown') {
-      this.allowdropdown = event.target.checked;
+    const checked = event.target.checked;
+    switch(attr) {
+      case 'allowdropdown' : this.allowdropdown = checked; break;
+      case 'showCounter' : this.showCounter = checked; break;
     }
   }
   onsearch(event: any) {

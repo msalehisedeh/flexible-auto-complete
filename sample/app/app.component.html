@@ -19,18 +19,7 @@
         [value]="trigger" 
         (keyup)="textkeyup($event)"
         (input)="onTriggerEntered($event)"  />
-    </label>
-    <label for="animateonresult">
-      <input 
-        type="checkbox" 
-        name="animateonresult" 
-        id="animateonresult" 
-        [value]="animateonresult" 
-        [checked]="animateonresult ? true: null" 
-        (keyup)="keyup($event)"
-        (click)="click($event, 'animateonresult')" /> 
-      <span>animate on result</span>
-    </label>  
+    </label> 
     <label for="allowdropdown">
       <input 
         type="checkbox" 
@@ -40,7 +29,18 @@
         [checked]="allowdropdown ? true: null" 
         (keyup)="keyup($event)"
         (click)="click($event, 'allowdropdown')" /> 
-      <span>allow dropdown</span>
+      <span>Allow dropdown</span>
+    </label>  
+    <label for="showCounter">
+      <input 
+        type="checkbox" 
+        name="showCounter" 
+        id="showCounter" 
+        [value]="showCounter" 
+        [checked]="showCounter ? true: null" 
+        (keyup)="keyup($event)"
+        (click)="click($event, 'showCounter')" /> 
+      <span>Show counter</span>
     </label>  
 </fieldset>
 <p>To complete your evaluation of this component, please type any portion of names: [Mathis,Mathew,Tonya,Nguyen,Cecelia,Gilliam,Bernard,Cooke,Lawrence,Jaime,Wilcox,Concepcion, ..] </p>
@@ -51,8 +51,8 @@
   direction="vertical"
   [delayby]="300"
   [triggeron]="trigger"
-  [animateonresult]="animateonresult"
   [allowdropdown]="allowdropdown"
+  [showCounter]="showCounter"
   viewport="200px"
   [template]="tab2" 
   [data]="data"

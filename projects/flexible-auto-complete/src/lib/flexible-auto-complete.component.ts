@@ -31,6 +31,8 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 
 	entry = "";
 	focusedItem = -1;
+	verticalPosition = '';
+	flipOrigin = false;
 	filteredData: any[] = [];
 
 	@Input("flexibleId")
@@ -46,10 +48,15 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	public prefetchdata = false;
 	
 	@Input("animateonresult")
-	public animateonresult = false;
+	set animateonresult(value: boolean) {
+		throw 'animateonresult is deprecated';
+	}
 	
 	@Input("allowdropdown")
 	public allowdropdown = false;
+	
+	@Input("showCounter")
+	public showCounter = false;
 	
 	@Input('keymap')
     public keymap: any[] = [];
@@ -90,7 +97,7 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	constructor(private http: HttpClient, private el: ElementRef) {}
 	
 	ngAfterViewInit() {
-		this.resize(false);
+		this.resize(false, []);
 		if (this.prefetchdata && this.source) {
 			this.http.get(this.source).subscribe(
 				(result: any) => {
@@ -123,6 +130,7 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 	onBlurItem(event: any, i: number) {
 		if (i === this.filteredData.length - 1) {
 			this.focusedItem = -1;
+			this.verticalPosition = '';
 			this.filteredData = [];
 		}
 	}
@@ -145,15 +153,22 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 			}
 		} 
 	}
-	private resize(flag: boolean) {
-		if (this.animateonresult) {
-			if (flag) {
-				this.el.nativeElement.classList.add("has-data");
+	private resize(flag: boolean, result: any[], source?: any) {
+		if (flag && source) {
+			const sr = source.getBoundingClientRect();
+			const dr = document.body.getBoundingClientRect();
+			if ((dr.height - sr.y) < (result.length * 20)) {
+				this.verticalPosition = (sr.height + 5) + 'px';
 			} else {
-				this.el.nativeElement.classList.remove("has-data");
+				this.verticalPosition = '';
 			}
-		} else {
-			this.el.nativeElement.classList.add("has-data");
+			this.flipOrigin = ((dr.width - (sr.x+sr.width)) < sr.width);
+			this.filteredData = result;
+		}
+	}
+	onFocus(event: any) {
+		if (event.target.value) {
+			this.search(event);
 		}
 	}
 	keyup(event: any) {
@@ -176,15 +191,14 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 				document.getElementById(this.flexibleId + "-item-0")?.focus();
 			}
 		} else {
-			this.focusedItem = -1;
+			this.filteredData = [];
 			this.search(event);
 		}
 	}
 	selectTab(item: any) {
 		this.onselect.emit(item);
 		this.focusedItem = -1;
-		this.filteredData = [];
-		setTimeout(()=> this.resize(false), 66);
+		setTimeout(()=> this.resize(false, this.filteredData), 66);
 	}
 	private search(event: any) {
 		this.entry = event.target.value;
@@ -200,18 +214,17 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 							const response = this.traverseResult(result);
 							if (response) {
 								this.data = response;
-								this.filteredData = response;
-								if (this.filteredData.length) {
+								if (response.length) {
 									this.onsearch.emit(key);
-									setTimeout(()=> this.resize(true), 66);
+									setTimeout(()=> this.resize(true, response, event.target), 66);
 								} else {
-									setTimeout(()=> this.resize(false), 66);
+									setTimeout(()=> this.resize(false, []), 66);
 								}
 							}
 						}
 					);
 				} else if (this.data) {
-					this.filteredData = this.data.filter( (item: any) => {
+					const response = this.data.filter( (item: any) => {
 						let keep = false;
 						for(let j = 0; j < this.keymap.length; j++) {
 							const k = this.keymap[j];
@@ -224,16 +237,17 @@ export class FlexibleAutoCompleteComponent implements AfterViewInit{
 						}
 						return keep;
 					});
-					if (this.filteredData.length) {
+					if (response.length) {
 						this.onsearch.emit(key);
-						setTimeout(()=> this.resize(true), 66);
+						setTimeout(()=> {
+							this.resize(true, response, event.target);
+						}, 66);
 					} else {
-						setTimeout(()=> this.resize(false), 66);
+						setTimeout(()=> this.resize(false, []), 66);
 					}
 				}
 			} else {
-				this.filteredData = [];
-				setTimeout(()=> this.resize(false), 66);
+				setTimeout(()=> this.resize(false, []), 66);
 			}
 		}, this.delayby);
 	}
