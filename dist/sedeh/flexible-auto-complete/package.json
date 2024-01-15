@@ -8,6 +8,14 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "keywords": [
+    "auto-complete",
+    "responsive",
+    "configurable",
+    "flexible",
+    "ADA compliant",
+    "easy to use"
+  ],
   "sideEffects": false,
   "module": "fesm2015/sedeh-flexible-auto-complete.mjs",
   "es2020": "fesm2020/sedeh-flexible-auto-complete.mjs",
